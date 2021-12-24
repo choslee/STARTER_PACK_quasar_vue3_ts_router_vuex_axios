@@ -1,4 +1,4 @@
-# Quasar App (quasar_vue3_router_vuex_axios)
+# Starter pack for Quasar App (Vue3/TypeScript with Router Vuex and Axios plugin)
 
 A Quasar Framework app
 

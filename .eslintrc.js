@@ -85,11 +85,13 @@ module.exports = {
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "prefer-promise-reject-errors": "off",
+    "no-unused-vars": "off",
 
     // TypeScript
     quotes: ["warn", "single", { avoidEscape: true }],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": ["off"],
 
     // allow debugger during development only
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",

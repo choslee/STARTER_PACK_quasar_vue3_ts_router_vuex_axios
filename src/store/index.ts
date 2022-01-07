@@ -1,3 +1,4 @@
+
 import { store } from 'quasar/wrappers'
 import { InjectionKey } from 'vue'
 import {
@@ -13,6 +14,9 @@ import { ExampleStateInterface } from './module-example/state'
 import { VuexExampleInterface } from './vuex_example_module/state'
 import vuexExampleModule from './vuex_example_module'
 
+import { GlobalStateInterface } from './global_state/state'
+import globalState from './global_state'
+
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation;
@@ -23,6 +27,7 @@ import vuexExampleModule from './vuex_example_module'
  */
 export interface RootInterface {
   // Define your own store structure, using submodules if needed
+  globalState: GlobalStateInterface,
   vuexExampleModule: VuexExampleInterface;
   example: ExampleStateInterface;
 
@@ -43,6 +48,7 @@ export const storeKey: InjectionKey<VuexStore<RootInterface>> = Symbol('vuex-key
 export default store(function (/* { ssrContext } */) {
   const Store = createStore<RootInterface>({
     modules: {
+      globalState,
       vuexExampleModule,
       example
     },
@@ -55,7 +61,7 @@ export default store(function (/* { ssrContext } */) {
   return Store
 })
 
-// Probvide useStore() helper for getting store in component
+// Provide useStore() helper for getting store in component
 export function useStore () {
   return vuexUseStore(storeKey)
 }

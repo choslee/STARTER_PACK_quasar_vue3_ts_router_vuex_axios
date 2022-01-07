@@ -7,6 +7,8 @@ const routes: RouteRecordRaw[] = [
     children: [
       { path: '', name: 'Home', component: () => import('pages/Home.vue') },
       { path: '/about', name: 'About', component: () => import('pages/About.vue') },
+      { path: '/vuex', name: 'Vuex', component: () => import('pages/VuexExample.vue') },
+
       { path: '/:catchAll(.*)*', component: () => import('pages/Error404.vue') }
     ]
   }

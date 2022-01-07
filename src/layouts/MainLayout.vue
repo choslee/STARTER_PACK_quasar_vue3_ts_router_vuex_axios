@@ -59,6 +59,12 @@ function toggleLeftDrawer () {
           label="About"
           exact
         />
+        <q-route-tab
+          icon="storage"
+          :to="{ name: 'Vuex' }"
+          label="Vuex"
+          exact
+        />
       </q-tabs>
     </q-drawer>
 

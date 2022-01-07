@@ -6,8 +6,12 @@ import {
   useStore as vuexUseStore
 } from 'vuex'
 
-// import example from './module-example'
-// import { ExampleStateInterface } from './module-example/state';
+// Modules with their interfaces:
+import example from './module-example'
+import { ExampleStateInterface } from './module-example/state'
+
+import { VuexExampleInterface } from './vuex_example_module/state'
+import vuexExampleModule from './vuex_example_module'
 
 /*
  * If not building with SSR mode, you can
@@ -17,28 +21,30 @@ import {
  * async/await or return a Promise which resolves
  * with the Store instance.
  */
-
-export interface StateInterface {
+export interface RootInterface {
   // Define your own store structure, using submodules if needed
-  // example: ExampleStateInterface;
+  vuexExampleModule: VuexExampleInterface;
+  example: ExampleStateInterface;
+
   // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
-  example: unknown
+  // example: unknown
 }
 
 // provide typings for `this.$store`
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $store: VuexStore<StateInterface>
+    $store: VuexStore<RootInterface>
   }
 }
 
 // provide typings for `useStore` helper
-export const storeKey: InjectionKey<VuexStore<StateInterface>> = Symbol('vuex-key')
+export const storeKey: InjectionKey<VuexStore<RootInterface>> = Symbol('vuex-key')
 
 export default store(function (/* { ssrContext } */) {
-  const Store = createStore<StateInterface>({
+  const Store = createStore<RootInterface>({
     modules: {
-      // example
+      vuexExampleModule,
+      example
     },
 
     // enable strict mode (adds overhead!)
@@ -49,6 +55,7 @@ export default store(function (/* { ssrContext } */) {
   return Store
 })
 
+// Probvide useStore() helper for getting store in component
 export function useStore () {
   return vuexUseStore(storeKey)
 }

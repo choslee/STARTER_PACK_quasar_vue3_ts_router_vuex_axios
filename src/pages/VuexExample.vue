@@ -15,15 +15,13 @@ const openClosed = computed({
   get: () => store.state.vuexExampleModule.openClosed,
   set: (val: boolean) => store.commit('vuexExampleModule/CHANGE_BOOLEAN_STATE_MUTATION', val)
 })
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+const threeNamesList = computed(() => store.getters['vuexExampleModule/firstThreeTodos'] as string[])
 
 // REACTIVE VARIABLE
-// For showing purpose is using this variable "inputName" (it is better to use directly computed variable)
-const inputName = ref<string>('')
-
 const todo = ref<string>('')
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-const threeNamesList = ref(store.getters['vuexExampleModule/firstThreeTodos'] as string[])
+// This variable "inputName" is only used as example it is better to use directly computed variable as "idComputed", "openClosed"
+const inputName = ref<string>('')
 
 // FUNCTIONS
 function changeNameComputed (val: string): void {
@@ -130,18 +128,20 @@ function addTodoThroughCommit (val: string) :void {
         />
       </div>
 
-      <div>
+      <div class="column">
         <q-btn
-
           color="purple"
           style="height: 50px;"
+          no-caps
+          class="q-ma-sm"
           label="Add new todo with DISPATCH ACTION"
           @click="addTodoTroughDispatch(todo)"
         />
-        <strong> | | </strong>
         <q-btn
-          color="purple"
+          color="green"
           style="height: 50px;"
+          class="q-ma-sm"
+          no-caps
           label="Add new todo with COMMIT MUTATION "
           @click="addTodoThroughCommit(todo)"
         />
@@ -173,7 +173,8 @@ function addTodoThroughCommit (val: string) :void {
 </template>
 
 <style scoped lang="scss" >
-.q-btn {
-  text-transform: initial;
-}
+// Preventing UPPERCASE btn name (no-caps)
+// .q-btn {
+//   text-transform: initial;
+// }
 </style>
